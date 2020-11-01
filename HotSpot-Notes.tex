@@ -1,4 +1,4 @@
-\documentclass[UTF8]{ctexart}
+\documentclass[UTF8, 12pt]{ctexart}
 \usepackage[english]{babel}
 \usepackage[a4paper, top=4cm, bottom=3cm]{geometry}
 \usepackage{hyperref}
@@ -6,7 +6,6 @@
 \usepackage{appendix}
 \usepackage{algorithm}
 \usepackage{algorithmic}
-\usepackage{lipsum}
 \usepackage{xcolor}
 \usepackage{multirow}
 \usepackage{makecell}
@@ -18,6 +17,7 @@
 \fancyhead{}
 \fancyhead[C]{\leftmark}
 \fancyhead[R]{\thepage}
+\setlength{\headheight}{15pt}
 \colorlet{BLUE}{blue}
 
 
@@ -40,65 +40,28 @@
 
 \section{Interpreter}
 \subsection{Macro Assembler}
-\lipsum
 \subsection{Interpreter Frame}
-\lipsum
 
 
 \section{Compiler}
 \subsection{Sea-of-Node IR}
-\lipsum
 \subsection{Debug Information}
-\lipsum
 \subsection{Deoptimization}
-\lipsum
 
 
 \section{Runtime}
 \subsection{Java Virtual Frame}
-\lipsum
 
 
 \section{Garbage Collection}
 \subsection{Basic Algorithms}
-\lipsum
-\begin{figure}
-\centering
-\begin{minipage}{0.5\linewidth}
-  \begin{algorithm}[H]
-  \caption{Calculate $y = x^n$}
-  \begin{algorithmic}
-  \REQUIRE $n \geq 0 \vee x \neq 0$
-  \ENSURE $y = x^n$
-  \STATE $y \leftarrow 1$
-  \IF{$n < 0$}
-  \STATE $X \leftarrow 1 / x$
-  \STATE $N \leftarrow -n$
-  \ELSE
-  \STATE $X \leftarrow x$
-  \STATE $N \leftarrow n$
-  \ENDIF
-  \WHILE{$N \neq 0$}
-  \IF{$N$ is even}
-  \STATE $X \leftarrow X \times X$
-  \STATE $N \leftarrow N / 2$
-  \ELSE[$N$ is odd]
-  \STATE $y \leftarrow y \times X$
-  \STATE $N \leftarrow N - 1$
-  \ENDIF
-  \ENDWHILE
-  \end{algorithmic}
-  \end{algorithm}
-\end{minipage}
-\end{figure}
 
 
 \begin{appendices}
-\section{\color{blue}Debugging OpenJDK 8 HotSpot VM}
-\par
-Sometimes to understand the code of HotSpot VM, you may need to follow its execution. When debugging HotSpot VM, I use Vim for browsing its source code and GDB for running it. They can be used together with tmux to serve as an IDE except for convenient code navigation. This is where grep can help. Also, you can use ctags and cscope.
-\par
-HotSpot VM provides many command-line options, some of which is useful for debugging. The options of HotSpot VM is only a part of options the command \textit{java} provides. The options supported by the command \textit{java} can be divided into two categories: standard options and non-standard options. Standard options are guaranteed to be supported by all implementations of the Java Virtual Machine. Non-standard options are general purpose options that are specific to the HotSpot VM and are subject to change. Options starting with -X or -XX are all non-standard options.\cite{java_command} The options of HotSpot VM can be loosely grouped into 4 categories:\cite{hotspot_options}
+\section{Debugging OpenJDK 8 HotSpot VM}
+To understand the source code of HotSpot VM, you may need to follow its execution. When debugging HotSpot VM, I use Vim for browsing its source code and GDB for running it. They can be used together with tmux to serve as an IDE except for convenient code navigation. This is where grep can help. Also, you can use ctags and cscope.
+
+HotSpot VM provides many command-line options, some of which is useful for debugging. The options of HotSpot VM is only a part of options the command \textit{java} provides. The options supported by the command \textit{java} can be divided into two categories: standard options and non-standard options. Standard options are guaranteed to be supported by all implementations of the Java Virtual Machine. Non-standard options are general purpose options that are specific to the HotSpot VM and are subject to change. Options starting with -X or -XX are all non-standard options, the latter of which is for advanced ones.\cite{java_command} The options of HotSpot VM can be loosely grouped into 4 categories:\cite{hotspot_options}
 \begin{table}[h!]
 \caption{HotSpot VM options}
 \begin{center}
@@ -108,16 +71,16 @@ HotSpot VM provides many command-line options, some of which is useful for debug
 \toprule
 \hline
 Behavioral Options & change the basic behavior of VM \\ \hline
-\makecell{Garbage First (G1) \\ Garbage Collection Options} & \\ \hline
+\makecell{Garbage First (G1) \\ Garbage Collection Options} & tune G1 GC\\ \hline
 Performance Options & tune VM performance \\ \hline
-Debugging Options & enable tracing, printing, or output of VM information \\ \hline
+Debugging Options & \makecell{enable tracing, printing, \\ or output of VM information} \\ \hline
 \bottomrule
 \hline
 \end{tabular}
 \end{center}
 \end{table}
-\par
-Some
+
+Debugging options are quite helpful for us to view internal state of HotSpot VM.
 
 \end{appendices}
 
@@ -129,10 +92,6 @@ https://docs.oracle.com/javase/8/docs/technotes/tools/unix/java.html
 
 \bibitem{hotspot_options} 
 https://www.oracle.com/java/technologies/javase/vmoptions-jsp.html
-
-\bibitem{knuthwebsite} 
-Knuth: Computers and Typesetting,
-\\\texttt{http://www-cs-faculty.stanford.edu/\~{}uno/abcde.html}
 \end{thebibliography}
 \addcontentsline{toc}{section}{References}
 
